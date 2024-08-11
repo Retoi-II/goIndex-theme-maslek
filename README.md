@@ -1,133 +1,65 @@
-<!-- # GoIndex-theme-nexmoe -->
+<!-- # GoIndex-theme-maslek -->
+# Go-Index (Google Drive Index)
 
-主题基于 [yanzai/goindex](https://github.com/yanzai/goindex)
+
+demo: [Maslek DDL](https://test.maslek.workers.dev/0:/)
 
 
-## 预览
-![light](https://raw.githubusercontent.com/5MayRain/goIndex-theme-nexmoe/master/screenshot/light.jpg)
-![dark](https://raw.githubusercontent.com/5MayRain/goIndex-theme-nexmoe/master/screenshot/dark.jpg)
-![caption](https://raw.githubusercontent.com/5MayRain/goIndex-theme-nexmoe/master/screenshot/caption.jpg)
-![thumbnails-dplayer](https://raw.githubusercontent.com/5MayRain/goIndex-theme-nexmoe/master/screenshot/thumbnails-dplayer.jpg)
-![thumbnails-plyr](https://raw.githubusercontent.com/5MayRain/goIndex-theme-nexmoe/master/screenshot/thumbnails-plyr.jpg)
+# Instruksi Instalasi
 
-nexmoe:  [demo.zgh.workers.dev/](https://demo.zgh.workers.dev/)
+## Inisialisasi Cloudflare Workers
 
-## 部署
-1. 打开下列任意网址
-- https://install.kenci.workers.dev/
-- https://goindex.glitch.me/
-- https://goindex-install.herokuapp.com/
-- https://goindex-quick-install.glitch.me/
-2. 授权并获取代码，把获取到的 `client_id` `client_secret` `refresh_token` ，填入模板
-3. 将代码部署到 [Cloudflare Workers](https://www.cloudflare.com/)
+1. Siapkan akun cloudflare dan buka [Dashboard Cloudflare](https://dash.cloudflare.com/).
+2. Buka dropdown Workers & Pages lalu pilih Overview > Create Worker.
+3. Buat subdomain level 2 untuk situs yang ingin dibuat (subdomain level 1 bisa di-adjust di halaman workers), klik deploy.
+4. Continue to project > pilih tab Metrics > Edit Code.
 
-## 自定义
-### 模板
+## Inisialisasi Google Drive API
+
+1. Enable [Google Drive API](https://console.cloud.google.com/marketplace/product/google/drive.googleapis.com?q=search&referrer=search&authuser=4&supportedpurview=project).
+2. Create Credential.
+    - Credential Type:
+        - Select an API: Google Drive API.
+        - What data will you be accessing: User Data.
+    - OAuth Client ID 
+        - Application type: Web Application.
+        - Authorized redirect URIs: `https://{subdomainlv2}.{subdomain}.workers.dev`, kalau ingin modifikasi subdomain maka kembali ke halaman overview > change subdomain.
+3. Create > Done.
+4. Buka Tab Credential > klik pada App Name.
+5. Buka OAuth consent screen (lihat di bawah App Name).
+6. Pada bagian Testing, klik Publish App.
+7. Buka link ini di browser, isi dengan Client ID dan Redirect URI.
 ```bash
-themeConfig				//主题配置
-	url				//仓库地址
-	theme				//主题 ( light:亮色 | dark:深色 )
-	main_color			//主色调
-	accent_color			//强调色
-	avatar				//导航栏头像
-	bimg				//背景图片
-	menu_show			//是否显示菜单
-	menus				//菜单组
-		name			//名称
-		url			//地址
-	view				//定义可预览的文件
-	player_dp			//使用 DPlayer 播放，未填入的默认使用 Plyr 播放
-	thumbnails			//缩略图组
-		name			//名称
-		url			//地址
-	video_cover			//视频封面
-	video_subtitle			//视频字幕
+https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=https://www.googleapis.com/auth/drive&access_type=offline&prompt=consent
 ```
-
-### 示例
+8. Sign in dengan akun google yang digunakan, izinkan API.
+9. Kalau tampil halaman tidak ditemukan itu normal, kita akan fokus ke url untuk mengambil Refresh Token, ini contohnya:
 ```bash
-  // 仓库地址
-  "url": "//cdn.jsdelivr.net/gh/5MayRain/goIndex-theme-nexmoe",
-  // 主题 ( light:亮色 | dark:深色 )
-  "theme": "light", 
-  // 主色
-  "main_color": "blue-grey",
-  // 强调色
-  "accent_color": "blue",
-  // 头像
-  "avatar": "//cdn.jsdelivr.net/gh/5MayRain/ImageHosting/Blog/Website/avatar.png",
-  // 背景图片
-  "bimg": "//cdn.jsdelivr.net/gh/5MayRain/ImageHosting/Blog/Posts/2021/07/20/cover_01.jpg",
-  // 显示菜单
-  "menu_show": true,
-  // 菜单组
-  "menus": [
-    {
-      name: "Blog",
-      url: "//mrzgh.top"
-    },
-    {
-      name: "Log in",
-      url: "//drive.google.com"
-    }
-  ],
-  // 定义可预览的文件
-  "view": "|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|m3u8|",
-  // 使用 DPlayer 播放，未填入的默认使用 Plyr 播放
-  "player_dp": "|m3u8|flv|",
-  // 缩略图组
-  "thumbnails": [
-    {
-      name: "dplayer",
-      url: "Thumbnail/dplayer.jpg"
-    },
-    {
-      name: "plyr",
-      url: "Thumbnail/plyr.vtt"
-    }
-  ],
-  // 视频封面，${fileName} 表示当前视频的名字
-  "video_cover": "${fileName}.jpg",
-  // 视频字幕
-  "video_subtitle": "${fileName}.vtt",
+https://ddl.lexsz.workers.dev/?code=4/0AcvDMr...u3g&scope=https://www.googleapis.com/auth/drive
 ```
+10. Simpan token, yaitu `bash4/0AcvDMr...u3g` di notepad atau clipboard.
 
-## 获取团队盘
-- [https://td.hackgence.com/](https://td.hackgence.com/)
-- [https://team.hackgence.com/](https://team.hackgence.com/)
+## Deploy Aplikasi di Cloudflare Workers
 
-## 更新日志
-### v2.0.5
-- 修复自定义头像不可用
+1. Buka editor kode Cloudflare Workers, lalu masukkan kode [index.js](https://github.com/5MayRain/goIndex-theme-nexmoe/blob/master/dist/index.js).
+2. Beberapa identifier yang perlu diperhatikan:
+    - `siteName` : nama situs.
+    - `siteIcon` : favicon situs.
+    - `client_id` : diambil dari tab credential GD API.
+    - `client_secret` : diambil dari tab credential GD API.
+    - `refresh_token` : kode yang sudah disimpan tadi.
+    - `roots` : folder yang mau di-index, default: root.
+3. Kalau ingin memodifikasi situs lebih dalam lagi maka direkomendasikan menggunakan file dalam repositori ini karena sudah berbahasa indonesia dan siapkan CDN tentunya.
+4. Bagi yang ingin modifikasi, perhatikan fungsi ```themeConfig``` pada baris 72.
+    - `url` : dipakai untuk mengambil resource situs, CDN digunakan menyimpan situs modifikasi dan simpan url dalam identifier.
+    - `theme` : memilih tema, "light" dan "dark".
+    - `avatar` : foto profil di kiri atas halaman.
+    - `bimg` : background image.
+5. Untuk modifikasi situs buka folder `dist/themes/` lalu pilih "light" atau "dark" dan modifikasi pada file `app.js`. Jangan lupa untuk mengkonversinya menjadi `app.min.js` setelah selesai melakukan modifikasi.
+6. Happy modding, bisa digunakan juga untuk semua template yang tersedia.
 
-### v2.0.4
-- 修复 `${fileName} ` 参数不可用
-- `${fileName} ` 参数仅适用于自定义项的`视频封面 `和`视频字幕 `
+# Credit
 
-### v2.0.3
-- 支持更多的自定义
+original repository: [5MayRain/goIndex-theme-nexmoe](https://github.com/5MayRain/goIndex-theme-nexmoe/tree/master)
 
-### v2.0.2
-- 支持缩略图
-- DPlayer 缩略图名必须为 `thumbnails.jpg` [预览](https://demo.zgh.workers.dev/1:/Video/Live/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun.flv?a=view)
-- Plyr 缩略图文件名必须为 `thumbnails.vtt` [预览](https://demo.zgh.workers.dev/1:/Video/Live/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun.mp4?a=view)
-- 缩略图要和视频处于同一个目录下
-- 缩略图生成 [Plyr](https://github.com/radiantmediaplayer/rmp-create-vtt-thumbnails) [DPlayer](https://github.com/MoePlayer/DPlayer-thumbnails)
-- 修复部分 BUG
-
-### v2.0.1
-- 添加 Plyr 播放器
-- 支持播放 `hls` [预览](https://demo.zgh.workers.dev/1:/Video/Live/LiSA%20-%20Rising%20Hope/LiSA%20-%20Rising%20Hope.m3u8?a=view)
-- 支持播放 `flv` [预览](https://demo.zgh.workers.dev/1:/Video/Live/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun/%E5%8D%97%E6%9D%A1%E7%88%B1%E4%B9%83%20-%20Only%20My%20Railgun.flv?a=view)
-- 支持外挂字幕，字幕仅支持 `Webvtt` 格式 [预览](https://demo.zgh.workers.dev/1:/Video/Movie/%E9%A6%99%E6%B8%AF/%E6%91%A9%E7%99%BB%E4%BB%99%E5%B1%A5%E5%A5%87%E7%BC%98/%E6%91%A9%E7%99%BB%E4%BB%99%E5%B1%A5%E5%A5%87%E7%BC%98.mp4?a=view)
-- 字幕文件名必须和视频名相同，且处于同一个目录下
-- 视频封面的格式需为 `jpg` ，名字需和视频名相同，且处于同一个目录下
-- DPlayer 字幕不可用
-- 仅 `hls` 和 `flv` 使用 DPlayer 播放，其它使用 Plyr 播放 
-
-### v2.0.0
-- 之前的版本不在适用
-- 界面进行了一定的修改，使其更加的美观
-- 添加了一些的自定义，使用更加简单
-- 添加了亮色和深色的主题
-
+...
