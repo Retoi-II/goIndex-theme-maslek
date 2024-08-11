@@ -277,15 +277,15 @@ function list(path) {
     <ul class="mdui-list"> 
      <li class="mdui-list-item th"> 
       <div class="mdui-col-xs-12 mdui-col-sm-7">
-       文件
+       Nama File
   <i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
       </div> 
       <div class="mdui-col-sm-3 mdui-text-right">
-       修改时间
+       Terakhir Diubah
   <i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
       </div> 
       <div class="mdui-col-sm-2 mdui-text-right">
-       大小
+       Ukuran
   <i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
       </div> 
       </li> 
@@ -294,7 +294,7 @@ function list(path) {
    <div class="mdui-row"> 
     <ul id="list" class="mdui-list"> 
     </ul> 
-    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 项</div>
+    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">Menampilkan <span class="number"></span> item</div>
    </div>
   `;
     $('#content').html(content);
@@ -378,7 +378,7 @@ function list(path) {
         successResultCallback,
         function(path) {
             $('#spinner').remove();
-            var pass = prompt("目录加密, 请输入密码", "");
+            var pass = prompt("Halaman terkunci, silakan masukkan kredensial.", "");
             localStorage.setItem('password' + path, pass);
             if (pass != null && pass != "") {
                 list(path);
@@ -507,15 +507,15 @@ function render_search_result_list() {
     <ul class="mdui-list"> 
      <li class="mdui-list-item th"> 
       <div class="mdui-col-xs-12 mdui-col-sm-7">
-       文件
+       Nama File
   <i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
       </div> 
       <div class="mdui-col-sm-3 mdui-text-right">
-       修改时间
+       Terakhir Diubah
   <i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
       </div> 
       <div class="mdui-col-sm-2 mdui-text-right">
-       大小
+       Ukuran
   <i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
       </div> 
       </li> 
@@ -524,7 +524,7 @@ function render_search_result_list() {
    <div class="mdui-row"> 
     <ul id="list" class="mdui-list"> 
     </ul> 
-    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 项</div>
+    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">Menampilkan <span class="number"></span> item</div>
    </div>
   `;
     $('#content').html(content);
@@ -691,23 +691,23 @@ function onSearchResultItemClick(a_ele) {
                 modal: true,
                 closeOnEsc: true,
                 buttons: [{
-                    text: '打开',
+                    text: 'Buka',
                     onClick: function() {
                         window.location.href = href
                     }
                 }, {
-                    text: '新标签中打开',
+                    text: 'Buka di tab baru',
                     onClick: function() {
                         window.open(href)
                     }
-                }, { text: '取消' }]
+                }, { text: 'Batal' }]
             });
             return;
         }
         dialog.close();
         dialog = mdui.dialog({
-            title: '<i class="mdui-icon material-icons">&#xe811;</i>获取目标路径失败',
-            content: 'o(╯□╰)o 可能是因为该盘中并不存在此项！也可能因为没有把【与我共享】的文件添加到个人云端硬盘中！',
+            title: '<i class="mdui-icon material-icons">&#xe811;</i>Gagal buat dapetin jalur target.',
+            content: 'o(╯□╰)o Ada kesalahan le, keknya file-nya belum ditambahin dah！',
             history: false,
             modal: true,
             closeOnEsc: true,
@@ -928,7 +928,7 @@ function file_video(path) {
     $('#content').html(content);
     $('#copy-link').on('click', () => {
         copyToClipboard(url);
-        mdui.snackbar('已复制到剪切板!');
+        mdui.snackbar('Sudah disalin ke papan klip (clipboard)!');
     });
 
     if (ext == 'm3u8') {
@@ -937,11 +937,11 @@ function file_video(path) {
             controls: ['play-large', 'restart', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'fullscreen'],
             settings: ['captions', 'quality', 'speed', 'loop'],
             i18n: {
-                speed: '速度',
-                normal: '正常',
-                quality: '质量',
-                captions: '字幕',
-                disabled: '禁用',
+                speed: 'Kecepatan',
+                normal: 'Normal',
+                quality: 'Kualitas',
+                captions: 'Takarir',
+                disabled: 'Dinonaktifkan',
             },
             blankVideo: 'https://cdn.plyr.io/static/blank.mp4',
             autoplay: true,
@@ -977,11 +977,11 @@ function file_video(path) {
             controls: ['play-large', 'restart', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'fullscreen'],
             settings: ['captions', 'quality', 'speed', 'loop'],
             i18n: {
-                speed: '速度',
-                normal: '正常',
-                quality: '质量',
-                captions: '字幕',
-                disabled: '禁用',
+                speed: 'Kecepatan',
+                normal: 'Normal',
+                quality: 'Kualitas',
+                captions: 'Takarir',
+                disabled: 'Dinonaktifkan',
             },
             blankVideo: 'https://cdn.plyr.io/static/blank.mp4',
             autoplay: true,
@@ -998,11 +998,11 @@ function file_video(path) {
             controls: ['play-large', 'restart', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'fullscreen'],
             settings: ['captions', 'quality', 'speed', 'loop'],
             i18n: {
-                speed: '速度',
-                normal: '正常',
-                quality: '质量',
-                captions: '字幕',
-                disabled: '禁用',
+                speed: 'Kecepatan',
+                normal: 'Normal',
+                quality: 'Kualitas',
+                captions: 'Takarir',
+                disabled: 'Dinonaktifkan',
             },
             blankVideo: 'https://cdn.plyr.io/static/blank.mp4',
             autoplay: true,
@@ -1124,11 +1124,11 @@ function file_audio(path) {
 
     const player = new Plyr('audio', {
         i18n: {
-            speed: '速度',
-            normal: '正常',
-            quality: '质量',
-            captions: '字幕',
-            disabled: '禁用',
+            speed: 'Kecepatan',
+            normal: 'Normal',
+            quality: 'Kualitas',
+            captions: 'Takarir',
+            disabled: 'Dinonaktifkan',
         },
     });
     player.source = {
