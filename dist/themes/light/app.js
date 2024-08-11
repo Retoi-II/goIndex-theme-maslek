@@ -777,7 +777,7 @@ function file_code(path) {
 <pre id="editor" ></pre>
 </div>
 <div class="mdui-textfield">
-  <label class="mdui-textfield-label">下载地址</label>
+  <label class="mdui-textfield-label">URL Unduhan</label>
   <input class="mdui-textfield-input" type="text" value="${href}"/>
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
@@ -847,10 +847,10 @@ function file_video(path) {
         .map(it => `<li class="mdui-menu-item"><a href="${it.href}" class="mdui-ripple">${it.text}</a></li>`)
         .join('');
     player_items += `<li class="mdui-divider"></li>
-                   <li class="mdui-menu-item"><a id="copy-link" class="mdui-ripple">复制链接</a></li>`;
+                   <li class="mdui-menu-item"><a id="copy-link" class="mdui-ripple">Salin tautan</a></li>`;
     const playBtn = `
       <button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-menu="{target:'#player-items'}">
-        <i class="mdui-icon material-icons">&#xe039;</i>外部播放器播放<i class="mdui-icon material-icons">&#xe5cf;</i>
+        <i class="mdui-icon material-icons">&#xe039;</i>Pemutar Video Eksternal<i class="mdui-icon material-icons">&#xe5cf;</i>
       </button>
       <ul class="mdui-menu" id="player-items">${player_items}</ul>`;
 
@@ -913,13 +913,13 @@ function file_video(path) {
   <br>
   ${playerUI}
   <br>${playBtn}
-  <!-- 固定标签 -->
+  <!-- Pin Tags -->
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">下载地址</label>
+    <label class="mdui-textfield-label">URL Unduhan</label>
     <input class="mdui-textfield-input" type="text" value="${url}"/>
   </div>
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">HTML 引用地址</label>
+    <label class="mdui-textfield-label">URL Referensi HTML</label>
     <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
   </div>
 </div>
@@ -1026,7 +1026,7 @@ function file_video(path) {
             tracks: [{
                 kind: 'captions',
                 label: 'default',
-                srclang: 'cn',
+                srclang: 'en',
                 src: urlPath + video_subtitle,
                 default: true,
             }, ],
@@ -1039,7 +1039,7 @@ function file_video(path) {
         autoplay: true,
         theme: '#b7daff',
         loop: true,
-        lang: 'zh-cn',
+        lang: 'en',
         screenshot: true,
         hotkey: true,
         preload: 'auto',
@@ -1100,13 +1100,13 @@ function file_audio(path) {
   <br>
   ` + plyrUI + `
   <br>
-  <!-- 固定标签 -->
+  <!-- Pin Tags -->
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">下载地址</label>
+    <label class="mdui-textfield-label">URL Media</label>
     <input class="mdui-textfield-input" type="text" value="${url}"/>
   </div>
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">HTML 引用地址</label>
+    <label class="mdui-textfield-label">Referensi URL HTML</label>
     <textarea class="mdui-textfield-input"><audio><source src="${url}"></audio></textarea>
   </div>
 </div>
@@ -1209,15 +1209,15 @@ function file_image(path) {
     </div>
   <br>
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">下载地址</label>
+    <label class="mdui-textfield-label">URL Unduhan</label>
     <input class="mdui-textfield-input" type="text" value="${url}"/>
   </div>
   <div class="mdui-textfield">
-    <label class="mdui-textfield-label">HTML 引用地址</label>
+    <label class="mdui-textfield-label">URL Referensi HTML</label>
     <input class="mdui-textfield-input" type="text" value="<img src='${url}' />"/>
   </div>
         <div class="mdui-textfield">
-    <label class="mdui-textfield-label">Markdown 引用地址</label>
+    <label class="mdui-textfield-label">URL Referensi Markdown</label>
     <input class="mdui-textfield-input" type="text" value="![](${url})"/>
   </div>
         <br>
