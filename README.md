@@ -37,7 +37,7 @@ https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_u
 ```bash
 https://ddl.lexsz.workers.dev/?code=4/0AcvDMr...u3g&scope=https://www.googleapis.com/auth/drive
 ```
-10. Simpan token, yaitu `bash4/0AcvDMr...u3g` di notepad atau clipboard.
+10. Simpan token, yaitu `4/0AcvDMr...u3g` di notepad atau clipboard.
 
 ## Deploy Aplikasi di Cloudflare Workers
 
